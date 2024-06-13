@@ -15,12 +15,12 @@ const schema = Joi.object({
 
 // -validation schema for get request
 const getSchema = Joi.object({
-    sort: Joi.string().valid('createdAt', 'title','description').default('-createdAt'),
-    order:Joi.string().valid('asc','desc').default('desc'),
+    sort: Joi.string().allow('').valid('createdAt', 'title','description').default('-createdAt'),
+    order:Joi.string().allow('').valid('asc','desc').default('desc'),
     page: Joi.number().integer().min(1).default(1),
     limit: Joi.number().integer().min(1).max(100).default(10),
-    keyword: Joi.string().trim(),
-    tag: Joi.string().trim()
+    keyword: Joi.string().allow('').trim(),
+    tag: Joi.string().allow('').trim()
 }).unknown(false); 
 
 // console.log("reached in validation")
