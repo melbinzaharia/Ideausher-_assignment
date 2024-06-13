@@ -14,33 +14,28 @@ const app = Express();
 
 exports.configure = () => {
 
+  // reflect (enable) the requested origin in the CORS response
  
   var corsOptionsDelegate = function (req, callback) {
-    // callback(null, corsOptions) // callback expects two parameters: error and options
+   
     var corsOptions;
     console.log(req.headers.host)
-    corsOptions = { origin: true } // reflect (enable) the requested origin in the CORS response
-    callback(null, corsOptions) // callback expects two parameters: error and options
+    corsOptions = { origin: true } 
+    callback(null, corsOptions) 
   
-  //   if (whitelist.indexOf(req.headers.host) !== -1) {
-  //     corsOptions = { origin: true } // reflect (enable) the requested origin in the CORS response
-  //     callback(null, corsOptions) // callback expects two parameters: error and options
-  //   } else {
-  //     corsOptions = { origin: false } // disable CORS for this request
-  //     callback('Cors Error', corsOptions) // callback expects two parameters: error and options
-  //   }
+
   }
   app.use(Cors(corsOptionsDelegate))
    
   const limiter = RateLimit({
-    windowMs: 15 * 60 * 1000, // 15 minutes
+    windowMs: 15 * 60 * 1000,
     max: 10, // Limit each IP to 100 requests per `window` (here, per 15 minutes)
-    standardHeaders: true, // Return rate limit info in the `RateLimit-*` headers
-    legacyHeaders: false, // Disable the `X-RateLimit-*` headers
+    standardHeaders: true, 
+    legacyHeaders: false,
   })
   
   // Apply the rate limiting middleware to all requests
-  // app.use(limiter)
+  app.use(limiter)
   app.use(ResponseTime());
   app.use(Timeout('5s'))
   

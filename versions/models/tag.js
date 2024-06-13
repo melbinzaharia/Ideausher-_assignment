@@ -10,9 +10,13 @@ const TagModel= new Mongoose.Schema({
     type: String,
     required: true,
     unique: true
+  },
+  createdAt: {
+    type: Date,
+    default: Date.now
   }
 });
 
-const Tag = mongoose.model(modelName, TagModel,collectionName);
+const Tag = Mongoose.model(modelName, TagModel,collectionName);
 
 module.exports = Tag;

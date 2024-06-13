@@ -1,7 +1,7 @@
 const Express = require('express')
 // const SError = require('../errors/server_errors')
 
-const PostRouter = require('../controllers/users/post_router')
+const PostRouter = require('../controllers/posts/post_router')
 
 
  

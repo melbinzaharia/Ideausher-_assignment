@@ -16,7 +16,14 @@ const PostModel =  new Mongoose.Schema({
       type: String,
       required: true
     },
-    tags: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Tag' }]
+    tags: {
+      type: [String], 
+      required: true
+    },
+    createdAt: {
+      type: Date,
+      default: Date.now
+    }
   });
   
 
